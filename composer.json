@@ -1,0 +1,23 @@
+{
+  "name": "h4d/di",
+  "description": "H4D API response",
+  "keywords": [
+    "API", "response"
+  ],
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Miguel Graña",
+      "email": "miguel.mailbox@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "require-dev": {
+  },
+  "repositories": [],
+  "autoload": {
+    "psr-4": {"H4D\\ApiResponse\\": "src"}
+  }
+}
