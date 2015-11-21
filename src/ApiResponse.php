@@ -198,6 +198,19 @@ class ApiResponse implements ApiResponseInterface
     }
 
     /**
+     * @return $this
+     * @throws ApiResponseException
+     */
+    public function reset()
+    {
+        $this->setCode(self::DEFAULT_SUCCESS_CODE);
+        $this->setMessage('');
+        $this->setData([]);
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray()

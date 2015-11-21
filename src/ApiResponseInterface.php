@@ -38,9 +38,14 @@ interface ApiResponseInterface
     /**
      * @param array $array
      *
-     * @return mixed
+     * @return ApiResponseInterface
      */
     public function populate(array $array);
+
+    /**
+     * @return ApiResponseInterface
+     */
+    public function reset();
 
     /**
      * @return array
