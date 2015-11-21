@@ -164,6 +164,29 @@ class ApiResponse implements ApiResponseInterface
     }
 
     /**
+     * @param array $array
+     *
+     * @return $this
+     * @throws ApiResponseException
+     */
+    public function populate(array $array)
+    {
+        $requiredKeys = [ApiResponse::KEY_CODE, ApiResponse::KEY_DATA, ApiResponse::KEY_MESSAGE];
+        foreach($requiredKeys as $requiredKey)
+        {
+            if (!isset($data[$requiredKey]))
+            {
+                throw ApiResponseException::requiredKeyMissing($requiredKey, $requiredKeys);
+            }
+        }
+        $this->setCode($array[self::KEY_CODE]);
+        $this->setMessage($array[self::KEY_MESSAGE]);
+        $this->setData($array[self::KEY_DATA]);
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -171,6 +194,14 @@ class ApiResponse implements ApiResponseInterface
         return [self::KEY_CODE => $this->getCode(),
                 self::KEY_MESSAGE => $this->getMessage(),
                 self::KEY_DATA => $this->getData()];
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this->toArray());
     }
 
 }
