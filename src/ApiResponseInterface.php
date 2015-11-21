@@ -36,7 +36,19 @@ interface ApiResponseInterface
     public function getDataField($fieldName, $default = null);
 
     /**
+     * @param array $array
+     *
+     * @return mixed
+     */
+    public function populate(array $array);
+
+    /**
      * @return array
      */
     public function toArray();
+
+    /**
+     * @return string
+     */
+    public function toJson();
 }
