@@ -171,17 +171,28 @@ class ApiResponse implements ApiResponseInterface
      */
     public function populate(array $array)
     {
-        $requiredKeys = [ApiResponse::KEY_CODE, ApiResponse::KEY_DATA, ApiResponse::KEY_MESSAGE];
-        foreach($requiredKeys as $requiredKey)
+        $validKeys = [ApiResponse::KEY_CODE, ApiResponse::KEY_DATA, ApiResponse::KEY_MESSAGE];
+        foreach($validKeys as $validKey)
         {
-            if (!isset($data[$requiredKey]))
+            if (isset($array[$validKey]))
             {
-                throw ApiResponseException::requiredKeyMissing($requiredKey, $requiredKeys);
+                switch ($validKey)
+                {
+                    case self::KEY_CODE:
+                        $this->setCode($array[self::KEY_CODE]);
+                        break;
+                    case self::KEY_MESSAGE:
+                        $this->setMessage($array[self::KEY_MESSAGE]);
+                        break;
+                    case self::KEY_DATA:
+                        $this->setData($array[self::KEY_DATA]);
+                        break;
+                    default:
+                        // Nothing to do...
+                        break;
+                }
             }
         }
-        $this->setCode($array[self::KEY_CODE]);
-        $this->setMessage($array[self::KEY_MESSAGE]);
-        $this->setData($array[self::KEY_DATA]);
 
         return $this;
     }
