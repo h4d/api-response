@@ -100,7 +100,7 @@ class ApiResponse implements ApiResponseInterface
     }
 
     /**
-     * @return array
+     * @return string|int|float|bool|array|null
      */
     public function getData()
     {
@@ -108,16 +108,18 @@ class ApiResponse implements ApiResponseInterface
     }
 
     /**
-     * @param array $data
+     * @param string|int|float|bool|array|null $data
      *
      * @return ApiResponse
      * @throws ApiResponseException
      */
     public function setData($data)
     {
-        if (!is_array($data))
+        if (!is_null($data) && !is_int($data) && !is_bool($data)
+            && !is_float($data) && !is_string($data) && !is_array($data))
         {
-            throw ApiResponseException::invalidValueType(self::KEY_DATA, 'array');
+            throw ApiResponseException::invalidValueType(self::KEY_DATA,
+                                                         'string, int, float, bool, array, null');
         }
         $this->data = $data;
 
@@ -152,7 +154,7 @@ class ApiResponse implements ApiResponseInterface
      */
     public function addData($field, $value)
     {
-        if (!is_null($value) && !is_int($value)
+        if (!is_null($value) && !is_int($value) && !is_bool($value)
             && !is_float($value) && !is_string($value) && !is_array($value))
         {
             throw ApiResponseException::invalidValueType($field,
