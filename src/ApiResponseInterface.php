@@ -36,6 +36,15 @@ interface ApiResponseInterface
     public function getDataField($fieldName, $default = null);
 
     /**
+     * @param array|string $path Array or slash separated values string,
+     *                     ie: ['memory', 'total'] or 'memory/total'
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    public function getDataPath($path, $default = null);
+
+    /**
      * @param array $array
      *
      * @return ApiResponseInterface

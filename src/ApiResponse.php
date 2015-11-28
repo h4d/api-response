@@ -145,6 +145,34 @@ class ApiResponse implements ApiResponseInterface
         return isset($this->data[$fieldName]) ? $this->data[$fieldName] : $default;
     }
 
+
+    /**
+     * @param array|string $path Array or slash separated values string,
+     *                     ie: ['memory', 'total'] or 'memory/total'
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    public function getDataPath($path, $default = null)
+    {
+        $value = $default;
+        if (is_array($this->getData()))
+        {
+            $auxData = $this->getData();
+            $keys = is_string($path) ? explode('/', $path) : $path;
+            foreach($keys as $key)
+            {
+                if (is_array($auxData) && false == array_key_exists($key, $auxData))
+                {
+                    $value = $default;
+                    break;
+                }
+                $value = $auxData = $auxData[$key];
+            }
+        }
+
+        return $value;
+    }
     /**
      * @param string $field
      * @param string|int|float|bool|array|null $value
