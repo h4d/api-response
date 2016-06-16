@@ -35,7 +35,7 @@ class ApiResponse implements ApiResponseInterface
      * ApiResponse constructor.
      *
      * @param int $code
-     * @param array $data
+     * @param string|int|float|bool|array|null|\JsonSerializable $data
      * @param string $message
      */
     public function __construct($code = self::DEFAULT_SUCCESS_CODE, $data = [], $message = '')
@@ -108,7 +108,7 @@ class ApiResponse implements ApiResponseInterface
     }
 
     /**
-     * @param string|int|float|bool|array|null $data
+     * @param string|int|float|bool|array|null|\JsonSerializable $data
      *
      * @return ApiResponse
      * @throws ApiResponseException
@@ -116,10 +116,12 @@ class ApiResponse implements ApiResponseInterface
     public function setData($data)
     {
         if (!is_null($data) && !is_int($data) && !is_bool($data)
-            && !is_float($data) && !is_string($data) && !is_array($data))
+            && !is_float($data) && !is_string($data) && !is_array($data)
+            && !$data instanceof \JsonSerializable)
         {
             throw ApiResponseException::invalidValueType(self::KEY_DATA,
-                                                         'string, int, float, bool, array, null');
+                                                         'string, int, float, bool, array, null, ' .
+                                                         'JsonSerializable');
         }
         $this->data = $data;
 
@@ -175,7 +177,7 @@ class ApiResponse implements ApiResponseInterface
     }
     /**
      * @param string $field
-     * @param string|int|float|bool|array|null $value
+     * @param string|int|float|bool|array|null|\JsonSerializable $value
      *
      * @return $this
      * @throws ApiResponseException
@@ -183,10 +185,12 @@ class ApiResponse implements ApiResponseInterface
     public function addData($field, $value)
     {
         if (!is_null($value) && !is_int($value) && !is_bool($value)
-            && !is_float($value) && !is_string($value) && !is_array($value))
+            && !is_float($value) && !is_string($value) && !is_array($value)
+            && !$value instanceof \JsonSerializable)
         {
             throw ApiResponseException::invalidValueType($field,
-                                                         'string, int, float, bool, array, null');
+                                                         'string, int, float, bool, array, null, ' .
+                                                         'JsonSerializable');
         }
         $this->data[$field] = $value;
 
