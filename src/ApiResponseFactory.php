@@ -49,7 +49,7 @@ class ApiResponseFactory
         $requiredKeys = [ApiResponse::KEY_CODE, ApiResponse::KEY_DATA, ApiResponse::KEY_MESSAGE];
         foreach($requiredKeys as $requiredKey)
         {
-            if (!isset($data[$requiredKey]))
+            if (!array_key_exists($requiredKey, $data))
             {
                 throw ApiResponseException::requiredKeyMissing($requiredKey, $requiredKeys);
             }
