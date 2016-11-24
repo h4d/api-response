@@ -15,9 +15,13 @@
     "php": ">=5.5.9"
   },
   "require-dev": {
+    "phpunit/phpunit": "^4.0"
   },
   "repositories": [],
   "autoload": {
-    "psr-4": {"H4D\\ApiResponse\\": "src"}
+    "psr-4": {
+      "H4D\\ApiResponse\\": "src",
+      "H4D\\ApiResponse\\Tests\\Unit\\": "tests"
+    }
   }
 }
