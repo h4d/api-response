@@ -6,17 +6,9 @@ Clases básicas para a instanciación de respuestas tipo API.
 
 Esta biblioteca puede instalarse vía composer añadiendo esto a tu fichero composer.json:
 
-    {
-      "require": {
-        "h4d/api-response": "^1.0"
-      },
-      "repositories": [
-        {
-          "type": "vcs",
-          "url": "git@dev.edusalguero.com:h4d/api-response.git"
-        }
-      ]
-    }
+  "require": {
+    "h4d/api-response": "^1.0"
+  }
     
 # Uso directo
 
